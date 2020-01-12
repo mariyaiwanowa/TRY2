@@ -1,10 +1,15 @@
-# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
-language: php
-
-# list any PHP version you want to test against
-php:
-  - '7.3'
-
-# configure notifications (email, IRC, campfire etc)
-notifications:
-  irc: "irc.freenode.org#yourfavouriteroomfortravis"
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+script:
+  - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: build
+  on:
+    branch: master
